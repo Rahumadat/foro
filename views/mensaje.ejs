@@ -4,37 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Foro</title>
 </head>
 <body>
     <h1>The Dojo Message Board</h1>
-    <form action="/mensaje" method="post" >
+    <form class="form1" action="/mensaje" method="post" >
         <label for="nombre">Nombre: </label><br>
         <input type="text" name="nombre"><br><br>
 
         <label for="comentario">Agregue su post: </label><br>
-        <textarea name="comentario" id="comentario" cols="40" rows="5" placeholder="ingrese mensaje"></textarea><br>
+        <textarea name="comentario" id="comentario" cols="60" rows="5" placeholder="ingrese mensaje"></textarea><br>
 
         <button>Post Message</button>
         
     </form>
     <h3><%= mensaje %></h3>
-    <section>
-        <h2>>post de BD</h2>
+    <section class="historial" >
+        <h2>Post ya realizados y sus comentarios</h2>
         <% for (var x in existemsj) { %>
-            <div>
-                <h5>Nombre: <%= existemsj[x].nombre %></h5>
-                <h5>Comentario: <%= existemsj[x].comentario %> </h5>
-                
-                <% for (var y in existemsj[x].postcomentario) { %>
-                    <h5>Nombre: <%= existemsj[x].postcomentario[y].nombre %></h5>
-                <h5>Comentario: <%= existemsj[x].postcomentario[y].comentario %> </h5>
-                    <% } %>
+            <div class="postanterior" >
+                <h4>Nombre: <%= existemsj[x].nombre %></h4>
+                <h4>Post: <%= existemsj[x].comentario %> </h4>
+                    <div class="comentarioanterior" >
+                    <% for (var y in existemsj[x].postcomentario) { %>
+                        <h4>Nombre: <%= existemsj[x].postcomentario[y].nombre %></h4>
+                        <h4>Comentario al Post: <%= existemsj[x].postcomentario[y].comentario %> </h4>
+                        <% } %>
+                    </div>
                 <form action="/mensajecomment/<%= existemsj[x]._id %>" method="post" >
                     <label for="nombre">Nombre: </label><br>
                     <input type="text" name="nombre"><br><br>
             
-                    <label for="comentario">comentario: </label><br>
+                    <label for="comentario">Haz tu comentario: </label><br>
                     <textarea name="comentario" id="comentario" cols="40" rows="5" placeholder="ingrese mensaje"></textarea><br>
             
                     <button>Post Message</button>
