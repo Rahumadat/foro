@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro</title>
+</head>
+<body>
+    <h1>The Dojo Message Board</h1>
+    <form action="/mensaje" method="post" >
+        <label for="nombre">Nombre: </label><br>
+        <input type="text" name="nombre"><br><br>
+
+        <label for="comentario">Agregue su post: </label><br>
+        <textarea name="comentario" id="comentario" cols="40" rows="5" placeholder="ingrese mensaje"></textarea><br>
+
+        <button>Post Message</button>
+        
+    </form>
+    <h3><%= mensaje %></h3>
+    <section>
+        <h2>>post de BD</h2>
+        <% for (var x in existemsj) { %>
+            <div>
+                <h5>Nombre: <%= existemsj[x].nombre %></h5>
+                <h5>Comentario: <%= existemsj[x].comentario %> </h5>
+                
+                <% for (var y in existemsj[x].postcomentario) { %>
+                    <h5>Nombre: <%= existemsj[x].postcomentario[y].nombre %></h5>
+                <h5>Comentario: <%= existemsj[x].postcomentario[y].comentario %> </h5>
+                    <% } %>
+                <form action="/mensajecomment/<%= existemsj[x]._id %>" method="post" >
+                    <label for="nombre">Nombre: </label><br>
+                    <input type="text" name="nombre"><br><br>
+            
+                    <label for="comentario">comentario: </label><br>
+                    <textarea name="comentario" id="comentario" cols="40" rows="5" placeholder="ingrese mensaje"></textarea><br>
+            
+                    <button>Post Message</button>
+                    
+                </form>
+                
+            </div>         
+            <% } %>
+    </section>
+
+</body>
+</html>
